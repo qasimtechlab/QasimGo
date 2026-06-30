@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Qasim Go | Mirza Qasim Portfolio & Blog</title>
+    <meta name="description" content="Qasim kon hai? مرزا قاسم (Mirza Qasim) ایک 16 سالہ نوجوان ویب ڈیویلپر اور ویڈیو ایڈیٹر ہیں جن کا تعلق فیصل آباد سے ہے۔ Qasim Go پر ان کے پروجیکٹس اور بلاگز دیکھیں۔">
+    <meta name="keywords" content="Qasim go, Qasim mirza, Qasim kon hai, Mirza Qasim Faisalabad, Web Developer Pakistan, Video Editor, Qasim Portfolio">
+    <meta name="author" content="Mirza Qasim">
+
+    <!-- Fonts (Google Fonts: Noto Nastaliq Urdu for authentic Urdu look & Poppins for English) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        urdu: ['"Noto Nastaliq Urdu"', 'serif'],
+                        english: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#3b82f6', // Blue-500
+                        secondary: '#1e40af', // Blue-800
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Nastaliq Urdu', 'Poppins', serif, sans-serif;
+            background-color: #f8fafc; /* Slate-50 */
+            color: #1e293b; /* Slate-800 */
+            line-height: 2.2;
+            transition: all 0.3s ease;
+        }
+        .eng-text {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.5;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #1e40af; }
+        
+        /* Modal Transition Animation */
+        .modal-blur {
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="antialiased font-urdu">
+
+    <!-- Navbar -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full z-50 top-0 border-b border-slate-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <h1 class="text-3xl font-extrabold text-primary eng-text tracking-wider">Qasim<span class="text-slate-800">Go</span></h1>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-6 space-x-reverse">
+                    <div class="flex items-baseline space-x-4 space-x-reverse">
+                        <a href="#home" id="nav-home" class="text-slate-700 hover:text-primary px-3 py-2 rounded-md text-lg font-medium transition-all duration-200">ہوم</a>
+                        <a href="#about" id="nav-about" class="text-slate-700 hover:text-primary px-3 py-2 rounded-md text-lg font-medium transition-all duration-200">قاسم کے بارے میں</a>
+                        <a href="#posts" id="nav-posts" class="text-slate-700 hover:text-primary px-3 py-2 rounded-md text-lg font-medium transition-all duration-200">پوسٹس</a>
+                        <a href="#contact" id="nav-contact" class="text-slate-700 hover:text-primary px-3 py-2 rounded-md text-lg font-medium transition-all duration-200">رابطہ</a>
+                    </div>
+                    
+                    <!-- Language Switcher Desktop -->
+                    <button onclick="toggleLanguage()" class="bg-slate-100 hover:bg-primary hover:text-white text-slate-700 font-bold px-4 py-1.5 rounded-full transition-all duration-300 flex items-center gap-2 text-sm eng-text">
+                        <i class="fa-solid fa-language text-lg"></i>
+                        <span id="lang-btn-text">English</span>
+                    </button>
+                </div>
+                
+                <!-- Mobile menu & Switcher button container -->
+                <div class="md:hidden flex items-center space-x-3 space-x-reverse">
+                    <!-- Language Switcher Mobile Quick Access -->
+                    <button onclick="toggleLanguage()" class="bg-slate-100 hover:bg-primary hover:text-white text-slate-700 font-bold p-2.5 rounded-full transition-all duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-language text-xl"></i>
+                    </button>
+                    
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-slate-800 hover:text-primary focus:outline-none p-2 rounded-lg bg-slate-50">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 shadow-lg">
+            <div class="px-2 pt-2 pb-4 space-y-1 text-center">
+                <a href="#home" id="mob-nav-home" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block hover:bg-slate-50 hover:text-primary px-3 py-3 rounded-md text-base font-medium">ہوم</a>
+                <a href="#about" id="mob-nav-about" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block hover:bg-slate-50 hover:text-primary px-3 py-3 rounded-md text-base font-medium">قاسم کے بارے میں</a>
+                <a href="#posts" id="mob-nav-posts" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block hover:bg-slate-50 hover:text-primary px-3 py-3 rounded-md text-base font-medium">پوسٹس</a>
+                <a href="#contact" id="mob-nav-contact" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block hover:bg-slate-50 hover:text-primary px-3 py-3 rounded-md text-base font-medium">رابطہ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-28 pb-16 md:pt-36 md:pb-24 bg-gradient-to-b from-blue-50/70 via-white to-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mt-10 md:mt-0 text-center md:text-right">
+                <h2 id="hero-title" class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">سلام! یہ <span class="text-primary">مرزا قاسم</span> ہیں</h2>
+                <p id="hero-subtitle" class="text-xl md:text-2xl text-slate-600 mb-8 leading-relaxed">وہ ایک ماہر ویب ڈیویلپر اور پروفیشنل ویڈیو ایڈیٹر ہیں</p>
+                <div class="flex justify-center md:justify-start space-x-4 space-x-reverse">
+                    <a href="#posts" id="hero-btn-work" class="bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-xl shadow-md shadow-blue-500/20 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">پوسٹس</a>
+                    <a href="#contact" id="hero-btn-contact" class="bg-white hover:bg-slate-50 text-primary border border-slate-200 hover:border-primary font-bold py-3 px-8 rounded-xl shadow-sm transition-all duration-300 transform hover:-translate-y-1">رابطہ کریں</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <!-- Avatar / Graphics Wrapper -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-blue-400 rounded-full blur-2xl opacity-20 animate-pulse"></div>
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-white shadow-2xl overflow-hidden bg-slate-100 flex items-center justify-center transition-all duration-500 hover:scale-105">
+                        <img src="https://i.ibb.co/3KYxP56/file-000000006b64720bb35fc21716572f81.png" alt="Mirza Qasim" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x400/eff6ff/3b82f6?text=Mirza+Qasim'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Third Person) -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 id="about-heading" class="text-3xl font-extrabold text-slate-900 mb-10 border-b-4 border-primary inline-block pb-3">قاسم کون ہے؟ (Qasim kon hai)</h2>
+            <div class="bg-slate-50/50 border border-slate-100 rounded-3xl p-8 md:p-12 shadow-sm text-lg md:text-xl text-slate-700 text-justify md:text-center leading-loose space-y-6">
+                <p id="about-p1">
+                    <strong>مرزا قاسم</strong>، جن کا تعلق پاکستان کے مشہور اور صنعتی شہر <strong>فیصل آباد</strong> سے ہے، ٹیکنالوجی اور تخلیق کی دنیا میں ایک ابھرتا ہوا ستارہ ہیں۔ آپ کو یہ جان کر حیرت ہوگی کہ ان کی عمر محض <strong>16 سال</strong> ہے۔ 
+                </p>
+                <p id="about-p2" class="mt-4">
+                    اتنی کم عمری میں، جہاں عام طور پر نوجوان اپنے مستقبل کے بارے میں سوچنا شروع کرتے ہیں، قاسم نے <strong>ویب ڈیویلپمنٹ (Web Development)</strong> اور <strong>ویڈیو ایڈیٹنگ (Video Editing)</strong> جیسی پیچیدہ اور جدید سکلز میں نہ صرف قدم رکھا بلکہ ان میں مکمل مہارت (Expertise) حاصل کر لی ہے۔
+                </p>
+                <p id="about-p3" class="mt-4">
+                    وہ ایک شاندار ویب ڈیویلپر ہیں جو جدید ویب سائٹس بنانے کا ہنر جانتے ہیں، اور ساتھ ہی ایک بہترین ویڈیو ایڈیٹر بھی ہیں جو عام ویڈیوز کو اپنی تخلیقی صلاحیتوں سے شاہکار بنا دیتے ہیں۔ قاسم کی لگن، محنت اور سیکھنے کا جذبہ اس بات کا منہ بولتا ثبوت ہے کہ اگر انسان کا ارادہ پختہ ہو تو عمر کبھی بھی کامیابی کے راستے میں رکاوٹ نہیں بن سکتی۔ 
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-slate-50 border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 id="contact-heading" class="text-3xl font-extrabold text-slate-900 mb-10 border-b-4 border-primary inline-block pb-3">رابطہ کریں</h2>
+            <p id="contact-subtitle" class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">کسی بھی پروجیکٹ، معلومات یا تعاون کے لیے آپ ان سے براہ راست رابطہ کر سکتے ہیں۔</p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 max-w-3xl mx-auto">
+                <!-- WhatsApp Button -->
+                <a href="https://wa.me/923290033043" target="_blank" class="w-full md:w-auto flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white text-xl font-bold py-4 px-8 rounded-2xl shadow-lg shadow-emerald-500/10 transition-all duration-300 transform hover:-translate-y-1">
+                    <i class="fab fa-whatsapp text-3xl"></i>
+                    <span id="contact-whatsapp" class="eng-text">WhatsApp: 03290033043</span>
+                </a>
+                
+                <!-- Email Button -->
+                <a href="mailto:Qasimexperts@gmail.com" class="w-full md:w-auto flex items-center justify-center gap-3 bg-rose-500 hover:bg-rose-600 text-white text-xl font-bold py-4 px-8 rounded-2xl shadow-lg shadow-rose-500/10 transition-all duration-300 transform hover:-translate-y-1">
+                    <i class="fas fa-envelope text-3xl"></i>
+                    <span id="contact-email">ای میل بھیجیں</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Posts / Blog Section -->
+    <section id="posts" class="py-20 bg-white min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center mb-12 border-b border-slate-100 pb-4">
+                <h2 id="posts-heading" class="text-3xl font-extrabold text-slate-900 border-b-4 border-primary inline-block pb-3">تازہ ترین پوسٹس اور پروجیکٹس</h2>
+            </div>
+
+            <!-- Loader -->
+            <div id="loader" class="flex justify-center items-center py-20">
+                <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"></div>
+            </div>
+
+            <!-- Posts Grid -->
+            <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
+                <!-- Posts will be dynamically injected here -->
+            </div>
+            
+            <!-- No Posts Message -->
+            <div id="no-posts" class="hidden text-center py-20 text-slate-500 text-xl">
+                ابھی تک کوئی پوسٹ موجود نہیں ہے۔
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12 text-center">
+        <div class="max-w-7xl mx-auto px-4 space-y-4">
+            <p id="footer-text" class="eng-text mb-2">&copy; <span id="year">2026</span> Qasim Go. All Rights Reserved.</p>
+            <p id="footer-sub" class="text-sm text-slate-400">Developed with ❤️ by Mirza Qasim</p>
+        </div>
+    </footer>
+
+    <!-- Post Detail Modal -->
+    <div id="post-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden bg-black/60 backdrop-blur-sm p-4 md:p-10 transition-opacity">
+        <div class="bg-white rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl relative" dir="rtl">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-rose-500 hover:text-white text-slate-800 rounded-full w-10 h-10 flex items-center justify-center transition-all duration-200 z-10 shadow-sm">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <div class="p-6 md:p-10">
+                <h2 id="modal-title" class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 leading-tight"></h2>
+                
+                <div class="flex items-center text-sm text-slate-500 mb-6 gap-4">
+                    <span id="modal-date" class="flex items-center gap-1.5"><i class="far fa-calendar-alt"></i> تاریخ</span>
+                    <span id="modal-likes-count" class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full font-bold"></span>
+                </div>
+
+                <div id="modal-tags" class="flex flex-wrap gap-2 mb-6 eng-text" dir="ltr"></div>
+                
+                <p id="modal-desc" class="text-xl text-slate-700 font-semibold mb-6 border-l-4 border-primary pl-4 py-1 bg-slate-50 p-4 rounded-r-xl"></p>
+                
+                <!-- Images Carousel/Grid -->
+                <div id="modal-images" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <!-- Images will be injected dynamically -->
+                </div>
+                
+                <!-- Full Content -->
+                <div id="modal-content" class="text-lg text-slate-800 leading-loose border-t pt-8 whitespace-pre-wrap"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Dictionary & Toggle Script -->
+    <script>
+        // Set Language State
+        let currentLang = 'ur'; // Default: Urdu
+
+        // Dictionary containing both Urdu and English translated content
+        const translations = {
+            ur: {
+                home: "ہوم",
+                about: "قاسم کے بارے میں",
+                posts: "پوسٹس",
+                contact: "رابطہ",
+                heroTitle: "سلام! یہ <span class=\"text-primary\">مرزا قاسم</span> ہیں",
+                heroSubtitle: "وہ ایک ماہر ویب ڈیویلپر اور پروفیشنل ویڈیو ایڈیٹر ہیں",
+                heroBtnWork: "پوسٹس",
+                heroBtnContact: "رابطہ کریں",
+                aboutHeading: "قاسم کون ہے؟ (Qasim kon hai)",
+                aboutP1: "<strong>مرزا قاسم</strong>، جن کا تعلق پاکستان کے مشہور اور صنعتی شہر <strong>فیصل آباد</strong> سے ہے، ٹیکنالوجی اور تخلیق کی دنیا میں ایک ابھرتا ہوا ستارہ ہیں۔ آپ کو یہ جان کر حیرت ہوگی کہ ان کی عمر محض <strong>16 سال</strong> ہے۔",
+                aboutP2: "اتنی کم عمری میں، جہاں عام طور پر نوجوان اپنے مستقبل کے بارے میں سوچنا شروع کرتے ہیں، قاسم نے <strong>ویب ڈیویلپمنٹ (Web Development)</strong> اور <strong>ویڈیو ایڈیٹنگ (Video Editing)</strong> جیسی پیچیدہ اور جدید سکلز میں نہ صرف قدم رکھا بلکہ ان میں مکمل مہارت (Expertise) حاصل کر لی ہے۔",
+                aboutP3: "وہ ایک شاندار ویب ڈیویلپر ہیں جو جدید ویب سائٹس بنانے کا ہنر جانتے ہیں، اور ساتھ ہی ایک بہترین ویڈیو ایڈیٹر بھی ہیں جو عام ویڈیوز کو اپنی تخلیقی صلاحیتوں سے شاہکار بنا دیتے ہیں۔ قاسم کی لگن، محنت اور سیکھنے کا جذبہ اس بات کا منہ بولتا ثبوت ہے کہ اگر انسان کا ارادہ پختہ ہو تو عمر کبھی بھی کامیابی کے راستے میں رکاوٹ نہیں بن سکتی۔",
+                contactHeading: "رابطہ کریں",
+                contactSubtitle: "کسی بھی پروجیکٹ، معلومات یا تعاون کے لیے آپ ان سے براہ راست رابطہ کر سکتے ہیں۔",
+                contactWhatsapp: "واٹس ایپ: 03290033043",
+                contactEmail: "ای میل بھیجیں",
+                postsHeading: "تازہ ترین پوسٹس اور پروجیکٹس",
+                footerText: "&copy; 2026 Qasim Go. جملہ حقوق محفوظ ہیں۔",
+                footerSub: "Mirza Qasim کی محبت سے تیار کردہ",
+                noPosts: "ابھی تک کوئی پوسٹ موجود نہیں ہے۔",
+                likesText: "لائکس",
+                dateLabel: "تاریخ",
+                langBtn: "English"
+            },
+            en: {
+                home: "Home",
+                about: "About Qasim",
+                posts: "Posts",
+                contact: "Contact",
+                heroTitle: "Hello! Meet <span class=\"text-primary\">Mirza Qasim</span>",
+                heroSubtitle: "He is an expert web developer and professional video editor",
+                heroBtnWork: "Posts",
+                heroBtnContact: "Contact Him",
+                aboutHeading: "Who is Qasim? (Qasim kon hai)",
+                aboutP1: "<strong>Mirza Qasim</strong>, hailing from the famous industrial city of <strong>Faisalabad</strong>, Pakistan, is a rising star in the world of technology and creativity. You will be amazed to know that he is only <strong>16 years old</strong>.",
+                aboutP2: "At such a young age, when most teenagers are just starting to think about their future, Qasim has not only entered but mastered complex and modern skills like <strong>Web Development</strong> and <strong>Video Editing</strong>.",
+                aboutP3: "He is a brilliant web developer who knows the art of building modern websites, as well as an excellent video editor who transforms ordinary videos into masterpieces with his creative touch. Qasim's dedication, hard work, and passion for learning are proof that age is never a barrier to success if one's resolve is firm.",
+                contactHeading: "Get in Touch",
+                contactSubtitle: "For any projects, collaborations, or inquiries, you can reach out to him directly.",
+                contactWhatsapp: "WhatsApp: 03290033043",
+                contactEmail: "Send Email",
+                postsHeading: "Latest Posts & Projects",
+                footerText: "&copy; 2026 Qasim Go. All Rights Reserved.",
+                footerSub: "Developed with ❤️ by Mirza Qasim",
+                noPosts: "No posts available yet.",
+                likesText: "Likes",
+                dateLabel: "Date",
+                langBtn: "اردو"
+            }
+        };
+
+        // Function to toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'ur' ? 'en' : 'ur';
+            applyLanguage();
+        }
+
+        // Apply translations on elements
+        function applyLanguage() {
+            const data = translations[currentLang];
+            
+            // Set direction & font base classes
+            if (currentLang === 'ur') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ur';
+                document.body.className = 'antialiased font-urdu';
+                document.getElementById('post-modal').firstElementChild.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = 'en';
+                document.body.className = 'antialiased font-english';
+                document.getElementById('post-modal').firstElementChild.dir = 'ltr';
+            }
+
+            // Desktop Navigation links
+            document.getElementById('nav-home').innerText = data.home;
+            document.getElementById('nav-about').innerText = data.about;
+            document.getElementById('nav-posts').innerText = data.posts;
+            document.getElementById('nav-contact').innerText = data.contact;
+
+            // Mobile Navigation links
+            document.getElementById('mob-nav-home').innerText = data.home;
+            document.getElementById('mob-nav-about').innerText = data.about;
+            document.getElementById('mob-nav-posts').innerText = data.posts;
+            document.getElementById('mob-nav-contact').innerText = data.contact;
+
+            // Hero content
+            document.getElementById('hero-title').innerHTML = data.heroTitle;
+            document.getElementById('hero-subtitle').innerText = data.heroSubtitle;
+            document.getElementById('hero-btn-work').innerText = data.heroBtnWork;
+            document.getElementById('hero-btn-contact').innerText = data.heroBtnContact;
+
+            // About content
+            document.getElementById('about-heading').innerText = data.aboutHeading;
+            document.getElementById('about-p1').innerHTML = data.aboutP1;
+            document.getElementById('about-p2').innerHTML = data.aboutP2;
+            document.getElementById('about-p3').innerHTML = data.aboutP3;
+
+            // Contact section
+            document.getElementById('contact-heading').innerText = data.contactHeading;
+            document.getElementById('contact-subtitle').innerText = data.contactSubtitle;
+            document.getElementById('contact-whatsapp').innerText = data.contactWhatsapp;
+            document.getElementById('contact-email').innerText = data.contactEmail;
+
+            // Posts section & Footer
+            document.getElementById('posts-heading').innerText = data.postsHeading;
+            document.getElementById('footer-text').innerHTML = data.footerText;
+            document.getElementById('footer-sub').innerHTML = data.footerSub;
+            document.getElementById('no-posts').innerText = data.noPosts;
+
+            // Language Switcher Button Text
+            document.getElementById('lang-btn-text').innerText = data.langBtn;
+
+            // Re-render post dynamic grids to match direction/formatting
+            if (typeof window.renderPosts === 'function') {
+                window.renderPosts();
+            }
+        }
+    </script>
+
+    <!-- Firebase Logic -->
+    <script type="module">
+        // Import Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // User's Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLwwjggn-gDDBGFbUyKHVXCxw4Bg-ABlQ",
+            authDomain: "qasimgo-f24f6.firebaseapp.com",
+            projectId: "qasimgo-f24f6",
+            storageBucket: "qasimgo-f24f6.firebasestorage.app",
+            messagingSenderId: "226931623768",
+            appId: "1:226931623768:web:0aba20acb1e3b4ae21c72d",
+            measurementId: "G-5J9DVLH2L3"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // DOM Elements for dynamic update
+        const postsGrid = document.getElementById('posts-grid');
+        const loader = document.getElementById('loader');
+        const noPostsMsg = document.getElementById('no-posts');
+        
+        // Modal Elements
+        const modal = document.getElementById('post-modal');
+        const mTitle = document.getElementById('modal-title');
+        const mDate = document.getElementById('modal-date');
+        const mLikes = document.getElementById('modal-likes-count');
+        const mTags = document.getElementById('modal-tags');
+        const mDesc = document.getElementById('modal-desc');
+        const mImages = document.getElementById('modal-images');
+        const mContent = document.getElementById('modal-content');
+
+        // Storage state for the post lists
+        let allPosts = [];
+
+        // Dynamic date formatter logic matching active locale
+        const formatDate = (timestamp) => {
+            if (!timestamp) return currentLang === 'ur' ? 'نامعلوم تاریخ' : 'Unknown Date';
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+            const localeStr = currentLang === 'ur' ? 'ur-PK' : 'en-US';
+            return date.toLocaleDateString(localeStr, { year: 'numeric', month: 'long', day: 'numeric' });
+        };
+
+        // Fetch Posts in Real-time from Firebase collection
+        const postsCollection = collection(db, 'qasim_posts');
+        
+        onSnapshot(postsCollection, (snapshot) => {
+            allPosts = [];
+            snapshot.forEach((doc) => {
+                allPosts.push({ id: doc.id, ...doc.data() });
+            });
+            
+            // Sort posts by date (newest first) in memory
+            allPosts.sort((a, b) => {
+                const dateA = a.createdAt ? (a.createdAt.seconds || a.createdAt) : 0;
+                const dateB = b.createdAt ? (b.createdAt.seconds || b.createdAt) : 0;
+                return dateB - dateA;
+            });
+
+            renderPosts();
+        }, (error) => {
+            console.error("Error fetching posts: ", error);
+            loader.innerHTML = `<p class="text-rose-500 font-semibold">${currentLang === 'ur' ? 'پوسٹس لوڈ کرنے میں مسئلہ پیش آیا۔' : 'Failed to load posts.'}</p>`;
+        });
+
+        // Safe liked posts storage logic
+        const getLikedPosts = () => {
+            const liked = localStorage.getItem('qasim_liked_posts');
+            return liked ? JSON.parse(liked) : [];
+        };
+
+        // Global handler for Firestore Like feature
+        window.handleLike = async (event, postId) => {
+            event.stopPropagation(); // Prevent modal overlay opening trigger
+            
+            const likedPosts = getLikedPosts();
+            if (likedPosts.includes(postId)) {
+                alert(currentLang === 'ur' ? "آپ اس پوسٹ کو پہلے ہی لائک کر چکے ہیں! ❤️" : "You have already liked this post! ❤️");
+                return;
+            }
+
+            // Quick UI update
+            const btn = event.currentTarget;
+            const countSpan = btn.querySelector('.like-count');
+            const icon = btn.querySelector('i');
+            icon.classList.remove('far', 'text-slate-500');
+            icon.classList.add('fas', 'text-rose-500');
+            countSpan.innerText = parseInt(countSpan.innerText) + 1;
+
+            try {
+                // Execute incremental update in Firestore
+                const postRef = doc(db, 'qasim_posts', postId);
+                await updateDoc(postRef, {
+                    likes: increment(1)
+                });
+                
+                // Track update globally in localstorage
+                likedPosts.push(postId);
+                localStorage.setItem('qasim_liked_posts', JSON.stringify(likedPosts));
+                
+            } catch (error) {
+                console.error("Error liking post:", error);
+            }
+        };
+
+        // Detail Modal View opener
+        window.openModal = (postId) => {
+            const post = allPosts.find(p => p.id === postId);
+            if (!post) return;
+
+            mTitle.innerText = post.title || (currentLang === 'ur' ? 'بغیر عنوان' : 'Untitled');
+            mDate.innerHTML = `<i class="far fa-calendar-alt ${currentLang === 'ur' ? 'ml-1' : 'mr-1'}"></i> ${formatDate(post.createdAt)}`;
+            mLikes.innerText = `${post.likes || 0} ${currentLang === 'ur' ? 'لائکس ❤️' : 'Likes ❤️'}`;
+            mDesc.innerText = post.description || '';
+            mContent.innerText = post.content || '';
+
+            // Handle Tags
+            mTags.innerHTML = '';
+            if (post.tags && Array.isArray(post.tags)) {
+                post.tags.forEach(tag => {
+                    mTags.innerHTML += `<span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-medium border border-slate-200">#${tag}</span>`;
+                });
+            } else if (typeof post.tags === 'string') {
+                 post.tags.split(',').forEach(tag => {
+                    if(tag.trim()) mTags.innerHTML += `<span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-medium border border-slate-200">#${tag.trim()}</span>`;
+                 });
+            }
+
+            // Render up to 5 dynamic post images
+            mImages.innerHTML = '';
+            const images = post.images || [];
+            if (images.length > 0) {
+                images.forEach((imgUrl, index) => {
+                    if(imgUrl && imgUrl.trim() !== '') {
+                        const colSpanClass = (images.length === 1 || (index === 0 && images.length % 2 !== 0)) ? 'md:col-span-2' : '';
+                        mImages.innerHTML += `
+                            <div class="${colSpanClass} overflow-hidden rounded-2xl border border-slate-100 shadow-sm">
+                                <img src="${imgUrl}" alt="Post Image" class="w-full h-auto object-cover max-h-96 transition duration-300 hover:scale-[1.02]" onerror="this.style.display='none'">
+                            </div>
+                        `;
+                    }
+                });
+            }
+
+            // Scroll lock and modal view show
+            document.body.style.overflow = 'hidden';
+            modal.classList.remove('hidden');
+        };
+
+        // Modal closer logic
+        window.closeModal = () => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            mImages.innerHTML = '';
+        };
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Dynamic Post list renderer helper
+        window.renderPosts = () => {
+            loader.classList.add('hidden');
+            postsGrid.innerHTML = '';
+
+            if (allPosts.length === 0) {
+                noPostsMsg.classList.remove('hidden');
+                postsGrid.classList.add('hidden');
+                return;
+            }
+
+            noPostsMsg.classList.add('hidden');
+            postsGrid.classList.remove('hidden');
+
+            const likedPosts = getLikedPosts();
+
+            allPosts.forEach(post => {
+                const thumbnail = (post.images && post.images.length > 0 && post.images[0]) 
+                    ? post.images[0] 
+                    : 'https://placehold.co/600x400/eff6ff/3b82f6?text=Qasim+Go';
+                
+                const isLiked = likedPosts.includes(post.id);
+                const heartIcon = isLiked ? 'fas text-rose-500' : 'far text-slate-500 hover:text-rose-500';
+
+                let tagsHtml = '';
+                let tagsArray = [];
+                if (Array.isArray(post.tags)) tagsArray = post.tags;
+                else if (typeof post.tags === 'string') tagsArray = post.tags.split(',');
+                
+                tagsArray.slice(0, 3).forEach(tag => {
+                    if(tag.trim()) tagsHtml += `<span class="bg-blue-50 text-primary px-2.5 py-1 rounded-lg text-xs eng-text inline-block mb-1 mx-0.5" dir="ltr">#${tag.trim()}</span>`;
+                });
+
+                const cardHTML = `
+                    <div class="bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-slate-200 overflow-hidden cursor-pointer flex flex-col h-full transform hover:-translate-y-1" onclick="openModal('${post.id}')">
+                        <div class="relative h-52 w-full overflow-hidden bg-slate-50">
+                            <img src="${thumbnail}" alt="${post.title}" class="w-full h-full object-cover transition-all duration-500 hover:scale-105" onerror="this.src='https://placehold.co/600x400/f1f5f9/94a3b8?text=Image+Unavailable'">
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div class="mb-3">${tagsHtml}</div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 line-clamp-2 leading-snug">${post.title || (currentLang === 'ur' ? 'بغیر عنوان' : 'Untitled')}</h3>
+                            <p class="text-slate-600 text-sm mb-4 line-clamp-3 flex-grow leading-relaxed">${post.description || ''}</p>
+                            
+                            <div class="flex justify-between items-center pt-4 border-t border-slate-100 mt-auto">
+                                <span class="text-xs font-semibold text-slate-400">${formatDate(post.createdAt)}</span>
+                                <button onclick="handleLike(event, '${post.id}')" class="flex items-center gap-1.5 bg-slate-50 hover:bg-rose-50 px-3.5 py-1.5 rounded-xl transition-all duration-200" title="${currentLang === 'ur' ? 'لائک کریں' : 'Like'}">
+                                    <i class="${heartIcon} fa-heart text-base transition"></i>
+                                    <span class="like-count font-bold text-slate-700 text-xs eng-text">${post.likes || 0}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                postsGrid.innerHTML += cardHTML;
+            });
+        };
+
+        // Initialize footer year dynamic trigger
+        document.getElementById('year').innerText = new Date().getFullYear();
+    </script>
+</body>
+</html>
